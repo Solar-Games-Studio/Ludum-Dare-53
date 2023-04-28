@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.browar.editor-toolbox": {
+      "version": "https://github.com/arimger/Unity-Editor-Toolbox.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.editorcoroutines": "1.0.0"
+      },
+      "hash": "0ebb320f2e28cdae7bbd5a9ae0210fd1b6f6e575"
+    },
     "com.unity.collab-proxy": {
       "version": "2.0.1",
       "depth": 0,
