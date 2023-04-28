@@ -55,7 +55,7 @@ MonoBehaviour:
       m_Calls: []
   mode: 0
   togglerTag: main displayer
-  addToDontDestroy: 1
+  addToDontDestroy: 0
   removeDuplicates: 1
   item:
     guid: 654c0370-0938-4500-8b50-306a52f120d3

@@ -1169,7 +1169,7 @@ MonoBehaviour:
       m_Calls: []
   mode: 0
   togglerTag: console
-  addToDontDestroy: 1
+  addToDontDestroy: 0
   removeDuplicates: 1
   item:
     guid: f941712a-4675-4ab2-89a1-b4fee6db2474
