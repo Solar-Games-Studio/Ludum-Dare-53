@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1b33c3ee98b5a74d866b2ac1462f889, type: 3}
-  m_Name: Console
+  m_Script: {fileID: 11500000, guid: d21c3fd1e99bc0740bb9e7e3f9c6682e, type: 3}
+  m_Name: Scene Manager Data
   m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: 774da9ee0540f234e9066ec60f6f77a2, type: 2}
-  startArgsDisableCommandInitialization: 1
+  staticScenes:
+  - Systems
+  defaultPreset: {fileID: 11400000, guid: 94d90dc9b78b64c4d9d0a07c4c06a243, type: 2}
+  presets: []

@@ -331,7 +331,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: 39.57}
+  m_SizeDelta: {x: -20, y: 33.52}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8893613931869998520
 CanvasRenderer:
@@ -363,8 +363,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '[10:28:33] [qASIC] Hello World'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b174ba5ce14138d4fa31ab6fde180816, type: 2}
-  m_sharedMaterial: {fileID: 4836194310588752466, guid: b174ba5ce14138d4fa31ab6fde180816, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fbc43fe2e15b0204296c725bdef05caa, type: 2}
+  m_sharedMaterial: {fileID: 4441881570237072482, guid: fbc43fe2e15b0204296c725bdef05caa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -794,8 +794,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Enter text...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b174ba5ce14138d4fa31ab6fde180816, type: 2}
-  m_sharedMaterial: {fileID: 4836194310588752466, guid: b174ba5ce14138d4fa31ab6fde180816, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fbc43fe2e15b0204296c725bdef05caa, type: 2}
+  m_sharedMaterial: {fileID: 4441881570237072482, guid: fbc43fe2e15b0204296c725bdef05caa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1172,7 +1172,7 @@ MonoBehaviour:
   addToDontDestroy: 1
   removeDuplicates: 1
   item:
-    guid: 7d09f285-2eae-440c-8035-c3e756f78514
+    guid: f941712a-4675-4ab2-89a1-b4fee6db2474
 --- !u!1 &8893613932262263875
 GameObject:
   m_ObjectHideFlags: 0
@@ -1278,8 +1278,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Execute
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b174ba5ce14138d4fa31ab6fde180816, type: 2}
-  m_sharedMaterial: {fileID: 4836194310588752466, guid: b174ba5ce14138d4fa31ab6fde180816, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fbc43fe2e15b0204296c725bdef05caa, type: 2}
+  m_sharedMaterial: {fileID: 4441881570237072482, guid: fbc43fe2e15b0204296c725bdef05caa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1840,8 +1840,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b174ba5ce14138d4fa31ab6fde180816, type: 2}
-  m_sharedMaterial: {fileID: 4836194310588752466, guid: b174ba5ce14138d4fa31ab6fde180816, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fbc43fe2e15b0204296c725bdef05caa, type: 2}
+  m_sharedMaterial: {fileID: 4441881570237072482, guid: fbc43fe2e15b0204296c725bdef05caa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

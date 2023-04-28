@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1b33c3ee98b5a74d866b2ac1462f889, type: 3}
-  m_Name: Console
+  m_Script: {fileID: 11500000, guid: d7b4ba3055f559942be66a86cbecb4ea, type: 3}
+  m_Name: Gameplay Scene Preset
   m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: 774da9ee0540f234e9066ec60f6f77a2, type: 2}
-  startArgsDisableCommandInitialization: 1
+  targetScenes: []
+  staticScenes: []
