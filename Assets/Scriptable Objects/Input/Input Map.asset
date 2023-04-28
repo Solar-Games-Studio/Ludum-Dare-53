@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7fff99c208a6cb43b02e622f339150a, type: 3}
+  m_Name: Input Map
+  m_EditorClassIdentifier: 
+  defaultGroup: 0
+  groups:
+  - itemName: Default
+    guid: 08e515b9-1341-49be-9484-7005bb3c2d20
+    items:
+    - rid: 3556189591879548940
+    - rid: 3556189591879548941
+    - rid: 3556189591879548942
+    - rid: 3556189591879548943
+    - rid: 3556189591879548944
+  - itemName: Debug
+    guid: c30102ba-c9dc-4ea2-b2d2-0bb658d17204
+    items:
+    - rid: 3556189591879548938
+    - rid: 3556189591879548939
+  references:
+    version: 2
+    RefIds:
+    - rid: 3556189591879548938
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Console
+        guid: f941712a-4675-4ab2-89a1-b4fee6db2474
+        keys:
+        - key_keyboard/BackQuote
+        - key_keyboard/Tilde
+    - rid: 3556189591879548939
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Debug Displayer
+        guid: 654c0370-0938-4500-8b50-306a52f120d3
+        keys:
+        - key_keyboard/F7
+    - rid: 3556189591879548940
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Forward
+        guid: 75d797f9-6409-4ead-8e52-2a1db072ea19
+        keys:
+        - key_keyboard/W
+        - key_gamepad/LeftStickUp
+    - rid: 3556189591879548941
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Backward
+        guid: edb9b33a-d7ce-4af2-b15a-f374d73bb041
+        keys:
+        - key_keyboard/S
+        - key_gamepad/LeftStickDown
+    - rid: 3556189591879548942
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Left
+        guid: da9c23b3-65fa-4860-be47-82c469428689
+        keys:
+        - key_keyboard/A
+        - key_gamepad/LeftStickLeft
+    - rid: 3556189591879548943
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Right
+        guid: d89ef8f0-54b5-45be-b27e-be38e1baf890
+        keys:
+        - key_keyboard/D
+        - key_gamepad/LeftStickRight
+    - rid: 3556189591879548944
+      type: {class: Input2DAxis, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Movement
+        guid: a03e4da3-108c-4c10-acee-73ae22f9235e
+        XAxis:
+          axisGuid: 
+          positiveGuid: 75d797f9-6409-4ead-8e52-2a1db072ea19
+          negativeGuid: edb9b33a-d7ce-4af2-b15a-f374d73bb041
+        YAxis:
+          axisGuid: 
+          positiveGuid: da9c23b3-65fa-4860-be47-82c469428689
+          negativeGuid: d89ef8f0-54b5-45be-b27e-be38e1baf890
