@@ -1,12 +1,12 @@
 using qASIC;
-using qASIC.Input;
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using Game.Runtime.Input;
 
 namespace Game.Runtime.Movement
 {
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour, IInputable
     {
         private static bool _noclip = false;
         public static bool Noclip
@@ -55,15 +55,11 @@ namespace Game.Runtime.Movement
         [SerializeField] float coyoteTime = 0.15f;
         [SerializeField] float jumpQueue = 0.2f;
 
-        [Label("Input")]
-        [SerializeField] InputMapItemReference i_movement;
-        [SerializeField] InputMapItemReference i_sprint;
-        [SerializeField] InputMapItemReference i_jump;
-        [SerializeField] InputMapItemReference i_melt;
-
         [Label("Events")]
         public UnityEvent OnLand;
         public UnityEvent OnJump;
+
+        PlayerInput _input;
 
         private void Awake()
         {
@@ -72,18 +68,8 @@ namespace Game.Runtime.Movement
 
         private void Update()
         {
-            var input = new PlayerInput()
-            {
-                movement = i_movement.GetInputValue<Vector2>(),
-                sprint = i_sprint.GetInput(),
-                jumpThisFrame = i_jump.GetInputDown(),
-                jump = i_jump.GetInput(),
-                meltThisFrame = i_melt.GetInputDown(),
-                melt = i_melt.GetInput(),
-            };
-
-            HandleRotation(input);
-            Move(input);
+            HandleRotation();
+            Move();
 
             qDebug.DisplayValue("Noclip", Noclip);
         }
@@ -96,22 +82,25 @@ namespace Game.Runtime.Movement
             Gizmos.DrawWireSphere(transform.position + topPointOffset, topPointRadius);
         }
 
+        public void HandleInput(PlayerInput input) =>
+            _input = input;
+
         private void RefreshNoclip()
         {
             characterController.enabled = !Noclip;
         }
 
-        void Move(PlayerInput input)
+        void Move()
         {
             var path = new Vector3();
 
             switch (Noclip)
             {
                 case true:
-                    path = GetNoclipPath(input);
+                    path = GetNoclipPath();
                     break;
                 case false:
-                    path = GetNormalPath(input);
+                    path = GetNormalPath();
                     break;
             }
 
@@ -129,11 +118,11 @@ namespace Game.Runtime.Movement
             _lastPath = path;
         }
 
-        void HandleRotation(PlayerInput input)
+        void HandleRotation()
         {
-            if (input.movement.magnitude != 0f)
+            if (_input.movement.magnitude != 0f)
             {
-                float additionalAngle = Vector3.SignedAngle(input.movement, Vector3.up, Vector3.forward);
+                float additionalAngle = Vector3.SignedAngle(_input.movement, Vector3.up, Vector3.forward);
                 float desiredAngle = followAxis.eulerAngles.y + additionalAngle;
 
                 var euler = modelTransform.eulerAngles;
@@ -156,22 +145,22 @@ namespace Game.Runtime.Movement
 
         Vector3 _lastPath;
 
-        Vector3 GetNormalPath(PlayerInput input)
+        Vector3 GetNormalPath()
         {
             Vector3 path = new Vector3();
-            Vector3 inputPath = (followAxis.right * input.movement.x + followAxis.forward * input.movement.y).normalized;
+            Vector3 inputPath = (followAxis.right * _input.movement.x + followAxis.forward * _input.movement.y).normalized;
 
-            float gravityPath = GetGravityPath(input);
+            float gravityPath = GetGravityPath();
 
             switch (IsGround)
             {
                 case true:
                     path = inputPath;
-                    path *= input.sprint ? sprintSpeed : speed;
+                    path *= _input.sprint ? sprintSpeed : speed;
                     path *= SpeedMultiplier;
                     break;
                 case false:
-                    var currentSpeed = input.sprint ? sprintSpeed : speed;
+                    var currentSpeed = _input.sprint ? sprintSpeed : speed;
                     path = Vector3.Lerp(_lastPath, inputPath * currentSpeed * SpeedMultiplier, Time.deltaTime * airSpeedMultiplier);
                     path.y = 0f;
                     //path = Vector3.ClampMagnitude(path, currentSpeed * SpeedMultiplier);
@@ -183,10 +172,10 @@ namespace Game.Runtime.Movement
             return path;
         }
 
-        Vector3 GetNoclipPath(PlayerInput input)
+        Vector3 GetNoclipPath()
         {
-            return (followAxis.right * input.movement.x + followAxis.forward * input.movement.y + //WASD movement
-                ((input.jump ? 1f : 0f) - (input.melt ? 1f : 0f)) * Vector3.up) //Up and down
+            return (followAxis.right * _input.movement.x + followAxis.forward * _input.movement.y + //WASD movement
+                ((_input.jump ? 1f : 0f) - (_input.melt ? 1f : 0f)) * Vector3.up) //Up and down
                 .normalized * noclipSpeed * SpeedMultiplier; //Speed
         }
 
@@ -194,7 +183,7 @@ namespace Game.Runtime.Movement
         bool _acceptCoyoteTime;
         float _lastJumpQueueTime = float.MinValue;
 
-        float GetGravityPath(PlayerInput input)
+        float GetGravityPath()
         {
             IsGroundPrevious = IsGround;
             IsGround = CheckForGround();
@@ -217,7 +206,7 @@ namespace Game.Runtime.Movement
                     GravityVelovity = -groundVelocity;
                     break;
                 case false:
-                    if (input.jumpThisFrame)
+                    if (_input.jumpThisFrame)
                         _lastJumpQueueTime = Time.time;
 
                     GravityVelovity -= gravity * Time.deltaTime;
@@ -230,7 +219,7 @@ namespace Game.Runtime.Movement
 
             if ((forceJump || //force jump
                 (IsGround || CoyoteInRange() && _acceptCoyoteTime) && //coyote time
-                input.jumpThisFrame))
+                _input.jumpThisFrame))
             {
                 OnJump?.Invoke();
                 GravityVelovity = Mathf.Sqrt(jumpHeight * 2f * gravity);
@@ -245,15 +234,5 @@ namespace Game.Runtime.Movement
 
         public bool CheckForGround() =>
             Physics.CheckSphere(transform.position + groundPointOffset, groundPointRadius, layer);
-
-        public struct PlayerInput
-        {
-            public Vector2 movement;
-            public bool sprint;
-            public bool jumpThisFrame;
-            public bool jump;
-            public bool meltThisFrame;
-            public bool melt;
-        }
     }
 }

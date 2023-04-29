@@ -1,11 +1,13 @@
 using UnityEngine;
-using qASIC.Input;
+using Game.Runtime.Input;
 using qASIC.SettingsSystem;
 using Cinemachine;
 
+using UInput = UnityEngine.Input;
+
 namespace Game.Runtime.Camera
 {
-    public class PlayerCamera : MonoBehaviour
+    public class PlayerCamera : MonoBehaviour, IInputable
     {
         [Label("Rotation")]
         [SerializeField] Transform xAxis;
@@ -18,11 +20,11 @@ namespace Game.Runtime.Camera
         [SerializeField] float zoomSpeed = 0.1f;
 
         [Label("Input")]
-        [SerializeField] InputMapItemReference i_zoom;
-        [SerializeField] InputMapItemReference i_look;
+        [SerializeField] PlayerInputController input;
 
         float _yRotation;
         CinemachineFramingTransposer _camTransposer;
+        PlayerInput _input;
 
         public static float Sensitivity { get; set; } = 1f;
         public static float ZoomSpeed { get; set; } = 1f;
@@ -51,10 +53,13 @@ namespace Game.Runtime.Camera
             ZoomSpeed = value;
         }
 
+        public void HandleInput(PlayerInput input) =>
+            _input = input;
+
         void HandleRotation()
         {
-            Vector2 cameraInput = new Vector2(Input.GetAxis("Mouse X"), -Input.GetAxis("Mouse Y")) -
-                i_look.GetInputValue<Vector2>();
+            Vector2 cameraInput = new Vector2(UInput.GetAxis("Mouse X"), -UInput.GetAxis("Mouse Y")) -
+                _input.look;
 
             float xMove = cameraInput.x * Sensitivity;
             float xRotation = xAxis.eulerAngles.y + xMove;
@@ -75,7 +80,7 @@ namespace Game.Runtime.Camera
         void HandleZoom()
         {
             float zoom = _camTransposer.m_CameraDistance;
-            zoom -= i_zoom.GetInputValue<float>() * zoomSpeed * Time.deltaTime * ZoomSpeed;
+            zoom -= _input.zoom * zoomSpeed * Time.deltaTime * ZoomSpeed;
             zoom = Mathf.Clamp(zoom, zoomRegion.x, zoomRegion.y);
             _camTransposer.m_CameraDistance = zoom;
         }

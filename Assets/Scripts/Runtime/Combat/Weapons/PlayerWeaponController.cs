@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using Game.Runtime.Combat.Weapons.Items;
 using Game.Runtime.Camera;
-using qASIC.Input;
+using Game.Runtime.Input;
 using qASIC;
+
+using UInput = UnityEngine.Input;
 
 namespace Game.Runtime.Combat.Weapons
 {
-    public class PlayerWeaponController : MonoBehaviour
+    public class PlayerWeaponController : MonoBehaviour, IInputable
     {
         [Label("Inventory")]
         public List<InventoryWeapon> items = new List<InventoryWeapon>();
@@ -22,18 +24,14 @@ namespace Game.Runtime.Combat.Weapons
         [SerializeField] [Layer] int targetBoxLayerMask;
         [SerializeField] float maxTargetDistance = 20f;
 
-        [Label("Input")]
-        [SerializeField] InputMapItemReference i_shoot;
-        [SerializeField] InputMapItemReference i_target;
-        [SerializeField] InputMapItemReference i_itemNext;
-        [SerializeField] InputMapItemReference i_itemPrevious;
+        PlayerInput _input;
 
         private void Update()
         {
-            if (i_itemNext.GetInputDown() || Input.mouseScrollDelta.y > 0f)
+            if (_input.itemNext || UInput.mouseScrollDelta.y > 0f)
                 ChangeWeapon(1);
 
-            if (i_itemPrevious.GetInputDown() || Input.mouseScrollDelta.y < 0f)
+            if (_input.itemPrevious || UInput.mouseScrollDelta.y < 0f)
                 ChangeWeapon(-1);
 
             HandleWeapon();
@@ -53,6 +51,9 @@ namespace Game.Runtime.Combat.Weapons
             }
         }
 
+        public void HandleInput(PlayerInput input) =>
+            _input = input;
+
         float _equipTime;
 
         void ChangeWeapon(int amount)
@@ -71,7 +72,7 @@ namespace Game.Runtime.Combat.Weapons
 
         void HandleWeapon()
         {
-            bool shootInput = i_shoot.GetInput() || Input.GetMouseButton(0);
+            bool shootInput = _input.shoot || UInput.GetMouseButton(0);
             InventoryWeapon currentWeapon = items.IndexInRange(_selectedItemIndex) ?
                 items[_selectedItemIndex] :
                 null;
@@ -113,8 +114,8 @@ namespace Game.Runtime.Combat.Weapons
         bool _waitForTargetStop;
         void HandleTargeting()
         {
-            bool targetInput = i_target.GetInput() ||
-                Input.GetMouseButton(1);
+            bool targetInput = _input.target ||
+                UInput.GetMouseButton(1);
 
             //Ignore if the player didn't stop targeting
             if (_waitForTargetStop)

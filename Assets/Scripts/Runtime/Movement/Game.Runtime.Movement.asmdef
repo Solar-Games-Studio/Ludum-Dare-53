@@ -3,7 +3,8 @@
     "rootNamespace": "Game.Runtime.Movement",
     "references": [
         "GUID:b1181113609d0ad43a27c0338145e93c",
-        "GUID:696a0953692949b40bec8730e64e1fdd"
+        "GUID:696a0953692949b40bec8730e64e1fdd",
+        "GUID:ca0763064ad69a049a0ea37891a16c94"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
