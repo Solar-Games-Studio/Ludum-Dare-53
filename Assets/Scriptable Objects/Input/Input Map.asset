@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultGroup: 0
   groups:
-  - itemName: Default
+  - itemName: Gameplay
     guid: 08e515b9-1341-49be-9484-7005bb3c2d20
     items:
     - rid: 3556189591879548940
@@ -22,11 +22,25 @@ MonoBehaviour:
     - rid: 3556189591879548942
     - rid: 3556189591879548943
     - rid: 3556189591879548944
+    - rid: 3556189601171505155
+    - rid: 3556189601171505156
+    - rid: 3556189601171505157
   - itemName: Debug
     guid: c30102ba-c9dc-4ea2-b2d2-0bb658d17204
     items:
     - rid: 3556189591879548938
     - rid: 3556189591879548939
+  - itemName: Camera
+    guid: 3dc61c3e-dd45-46dc-97ce-20a1ace5233b
+    items:
+    - rid: 3556189601171505169
+    - rid: 3556189601171505170
+    - rid: 3556189601171505171
+    - rid: 3556189601171505172
+    - rid: 3556189601171505173
+    - rid: 3556189601171505174
+    - rid: 3556189601171505176
+    - rid: 3556189601171505175
   references:
     version: 2
     RefIds:
@@ -84,9 +98,95 @@ MonoBehaviour:
         guid: a03e4da3-108c-4c10-acee-73ae22f9235e
         XAxis:
           axisGuid: 
-          positiveGuid: 75d797f9-6409-4ead-8e52-2a1db072ea19
-          negativeGuid: edb9b33a-d7ce-4af2-b15a-f374d73bb041
+          positiveGuid: d89ef8f0-54b5-45be-b27e-be38e1baf890
+          negativeGuid: da9c23b3-65fa-4860-be47-82c469428689
         YAxis:
           axisGuid: 
-          positiveGuid: da9c23b3-65fa-4860-be47-82c469428689
-          negativeGuid: d89ef8f0-54b5-45be-b27e-be38e1baf890
+          positiveGuid: 75d797f9-6409-4ead-8e52-2a1db072ea19
+          negativeGuid: edb9b33a-d7ce-4af2-b15a-f374d73bb041
+    - rid: 3556189601171505155
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Sprint
+        guid: 4763d285-6fac-460b-b8e6-22c08c1d60ce
+        keys:
+        - key_keyboard/LeftShift
+        - key_gamepad/LeftStickButton
+    - rid: 3556189601171505156
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Jump
+        guid: 99bf7008-6449-48ae-863b-3fd2b2bf5a75
+        keys:
+        - key_keyboard/Space
+        - key_gamepad/A
+    - rid: 3556189601171505157
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Melt
+        guid: e79bac3e-ad8e-4c5a-9180-8d8a3e133fe6
+        keys:
+        - key_keyboard/LeftControl
+        - key_gamepad/B
+    - rid: 3556189601171505169
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Zoom In
+        guid: fe8a0058-db82-42f9-b6c7-c5a502a8ad6a
+        keys:
+        - key_gamepad/DPadUp
+    - rid: 3556189601171505170
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Zoom Out
+        guid: 92c5c3ec-a6ad-416f-9d55-77a1bfecee4c
+        keys:
+        - key_gamepad/DPadDown
+    - rid: 3556189601171505171
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Look Up
+        guid: 6d340ec2-b9da-4293-9c94-9f0b3b44279e
+        keys:
+        - key_gamepad/RightStickUp
+    - rid: 3556189601171505172
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Look Down
+        guid: 0b8eb623-afc8-4e98-ab36-9df931ccfe96
+        keys:
+        - key_gamepad/RightStickDown
+    - rid: 3556189601171505173
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Look Left
+        guid: cbe6e00e-827f-4bb5-a083-da7dd65560f4
+        keys:
+        - key_gamepad/RightStickLeft
+    - rid: 3556189601171505174
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Look Right
+        guid: 433f86a6-17a5-456b-ac26-481c1a466ebd
+        keys:
+        - key_gamepad/RightStickRight
+    - rid: 3556189601171505175
+      type: {class: Input1DAxis, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Zoom
+        guid: 1f1fb29b-5030-4e96-8c42-c529886a8436
+        positiveGuid: fe8a0058-db82-42f9-b6c7-c5a502a8ad6a
+        negativeGuid: 92c5c3ec-a6ad-416f-9d55-77a1bfecee4c
+    - rid: 3556189601171505176
+      type: {class: Input2DAxis, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Look
+        guid: 08ae7693-9c45-4c2f-93ef-ec890eda21bd
+        XAxis:
+          axisGuid: 
+          positiveGuid: cbe6e00e-827f-4bb5-a083-da7dd65560f4
+          negativeGuid: 433f86a6-17a5-456b-ac26-481c1a466ebd
+        YAxis:
+          axisGuid: 
+          positiveGuid: 6d340ec2-b9da-4293-9c94-9f0b3b44279e
+          negativeGuid: 0b8eb623-afc8-4e98-ab36-9df931ccfe96
