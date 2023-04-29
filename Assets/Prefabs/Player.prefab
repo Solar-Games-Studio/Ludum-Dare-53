@@ -480,7 +480,7 @@ MonoBehaviour:
   maxDifference: 10
   speed: 6
   sprintSpeed: 15
-  airSpeed: 0.8
+  airSpeedMultiplier: 5
   noclipSpeed: 16
   gravity: 30
   groundVelocity: 2
@@ -528,7 +528,6 @@ MonoBehaviour:
   shootPointPosition: {fileID: 5847565344233813800}
   shootPointRotation: {fileID: 8558194444767366110}
   playerCamera: {fileID: 8558194445770310664}
-  targetRayPoint: {fileID: 8558194445680189562}
   targetRayLayerMask:
     serializedVersion: 2
     m_Bits: 136

@@ -40,7 +40,7 @@ namespace Game.Runtime.Movement
         [Label("Movement")]
         [SerializeField] float speed = 6f;
         [SerializeField] float sprintSpeed = 15f;
-        [SerializeField] float airSpeed = 3f;
+        [SerializeField] float airSpeedMultiplier = 0.3f;
         [SerializeField] float noclipSpeed = 16f;
 
         [Label("Gravity")]
@@ -171,10 +171,10 @@ namespace Game.Runtime.Movement
                     path *= SpeedMultiplier;
                     break;
                 case false:
-                    path = _lastPath + inputPath * airSpeed;
-                    path *= SpeedMultiplier;
+                    var currentSpeed = input.sprint ? sprintSpeed : speed;
+                    path = Vector3.Lerp(_lastPath, inputPath * currentSpeed * SpeedMultiplier, Time.deltaTime * airSpeedMultiplier);
                     path.y = 0f;
-                    path = Vector3.ClampMagnitude(path, sprintSpeed);
+                    //path = Vector3.ClampMagnitude(path, currentSpeed * SpeedMultiplier);
                     break;
             }
 
