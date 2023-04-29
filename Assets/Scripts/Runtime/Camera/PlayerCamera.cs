@@ -3,8 +3,6 @@ using Game.Runtime.Input;
 using qASIC.SettingsSystem;
 using Cinemachine;
 
-using UInput = UnityEngine.Input;
-
 namespace Game.Runtime.Camera
 {
     public class PlayerCamera : MonoBehaviour, IInputable
@@ -18,9 +16,6 @@ namespace Game.Runtime.Camera
         [SerializeField] CinemachineVirtualCamera cam;
         [SerializeField][MinMaxSlider(0f, 10f)] Vector2 zoomRegion = new Vector2(1f, 5f);
         [SerializeField] float zoomSpeed = 0.1f;
-
-        [Label("Input")]
-        [SerializeField] PlayerInputController input;
 
         float _yRotation;
         CinemachineFramingTransposer _camTransposer;
@@ -58,12 +53,9 @@ namespace Game.Runtime.Camera
 
         void HandleRotation()
         {
-            Vector2 cameraInput = new Vector2(UInput.GetAxis("Mouse X"), -UInput.GetAxis("Mouse Y")) -
-                _input.look;
-
-            float xMove = cameraInput.x * Sensitivity;
+            float xMove = _input.look.x * Sensitivity;
             float xRotation = xAxis.eulerAngles.y + xMove;
-            _yRotation += cameraInput.y * Sensitivity;
+            _yRotation += _input.look.y * Sensitivity;
 
             if (OverrideRotation.HasValue)
             {

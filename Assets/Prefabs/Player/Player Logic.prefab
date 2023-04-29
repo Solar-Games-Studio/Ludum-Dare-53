@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8747658805429918509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8932222206654486920}
+  - component: {fileID: 1852768780293670298}
+  - component: {fileID: 1433252383220782990}
+  - component: {fileID: 2381667438069160533}
+  m_Layer: 6
+  m_Name: Player Logic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8932222206654486920
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8747658805429918509}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1852768780293670298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8747658805429918509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad37ae86fefd0cc448996bbb9f62fe7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xAxis: {fileID: 0}
+  yAxis: {fileID: 0}
+  yRotationLimit: {x: -90, y: 90}
+  cam: {fileID: 0}
+  zoomRegion: {x: 0.7, y: 2}
+  zoomSpeed: 5
+--- !u!114 &1433252383220782990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8747658805429918509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ebc9c488cc2f7d4f915b2f8c636cff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followAxis: {fileID: 0}
+  modelTransform: {fileID: 0}
+  characterController: {fileID: 0}
+  rotateSmoothly: 0
+  rotationSpeed: 1000
+  maxDifference: 10
+  speed: 6
+  sprintSpeed: 15
+  airSpeedMultiplier: 5
+  noclipSpeed: 16
+  gravity: 30
+  groundVelocity: 2
+  jumpHeight: 2.5
+  groundPointOffset: {x: 0, y: 0.4, z: 0}
+  groundPointRadius: 0.5
+  topPointOffset: {x: 0, y: 1.6, z: 0}
+  topPointRadius: 0.5
+  layer:
+    serializedVersion: 2
+    m_Bits: 8
+  coyoteTime: 0.15
+  jumpQueue: 0.05
+  OnLand:
+    m_PersistentCalls:
+      m_Calls: []
+  OnJump:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2381667438069160533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8747658805429918509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d1c2ecc16bb4b43ac5525578d100cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - weapon: {fileID: 11400000, guid: 38262d3215163f148baa18de1da1a9ae, type: 2}
+    ammo: 50
+  - weapon: {fileID: 11400000, guid: 3116b79317face74f8884acbea7651ad, type: 2}
+    ammo: 50
+  shootPointPosition: {fileID: 0}
+  shootPointRotation: {fileID: 0}
+  playerCamera: {fileID: 1852768780293670298}
+  targetRayLayerMask:
+    serializedVersion: 2
+    m_Bits: 136
+  targetBoxLayerMask: 7
+  maxTargetDistance: 32

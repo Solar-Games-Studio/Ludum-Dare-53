@@ -5,8 +5,6 @@ using Game.Runtime.Camera;
 using Game.Runtime.Input;
 using qASIC;
 
-using UInput = UnityEngine.Input;
-
 namespace Game.Runtime.Combat.Weapons
 {
     public class PlayerWeaponController : MonoBehaviour, IInputable
@@ -28,10 +26,10 @@ namespace Game.Runtime.Combat.Weapons
 
         private void Update()
         {
-            if (_input.itemNext || UInput.mouseScrollDelta.y > 0f)
+            if (_input.itemNext)
                 ChangeWeapon(1);
 
-            if (_input.itemPrevious || UInput.mouseScrollDelta.y < 0f)
+            if (_input.itemPrevious)
                 ChangeWeapon(-1);
 
             HandleWeapon();
@@ -72,7 +70,7 @@ namespace Game.Runtime.Combat.Weapons
 
         void HandleWeapon()
         {
-            bool shootInput = _input.shoot || UInput.GetMouseButton(0);
+            bool shootInput = _input.shoot;
             InventoryWeapon currentWeapon = items.IndexInRange(_selectedItemIndex) ?
                 items[_selectedItemIndex] :
                 null;
@@ -114,8 +112,7 @@ namespace Game.Runtime.Combat.Weapons
         bool _waitForTargetStop;
         void HandleTargeting()
         {
-            bool targetInput = _input.target ||
-                UInput.GetMouseButton(1);
+            bool targetInput = _input.target;
 
             //Ignore if the player didn't stop targeting
             if (_waitForTargetStop)

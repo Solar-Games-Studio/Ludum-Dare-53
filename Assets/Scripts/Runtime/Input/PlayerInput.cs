@@ -2,14 +2,14 @@
 
 namespace Game.Runtime.Input
 {
-    public class PlayerInput
+    public struct PlayerInput
     {
         public Vector2 movement;
         public bool sprint;
         public bool jump;
         public bool jumpThisFrame;
         public bool melt;
-        public bool metlThidFrame;
+        public bool meltThisFrame;
 
         public bool shoot;
         public bool shootThisFrame;

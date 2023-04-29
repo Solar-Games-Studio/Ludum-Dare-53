@@ -2,16 +2,18 @@ using UnityEngine;
 using qASIC.Input;
 using System.Collections.Generic;
 
+using UInput = UnityEngine.Input;
+
 namespace Game.Runtime.Input
 {
     public class PlayerInputController : MonoBehaviour
     {
         [BeginGroup("List")]
         [EndGroup]
-        [SerializeField] List<MonoBehaviour> playerInputablesList;
+        public List<MonoBehaviour> inputablesList;
 
-        [BeginGroup("Input")]
-        [Label("Movement")]
+        [BeginGroup("Movement")]
+        [Label("Input")]
         [SerializeField] InputMapItemReference i_movement;
         [SerializeField] InputMapItemReference i_sprint;
         [SerializeField] InputMapItemReference i_jump;
@@ -37,19 +39,20 @@ namespace Game.Runtime.Input
                 jump = i_jump.GetInput(),
                 jumpThisFrame = i_jump.GetInputDown(),
                 melt = i_melt.GetInput(),
-                metlThidFrame = i_melt.GetInputDown(),
+                meltThisFrame = i_melt.GetInputDown(),
 
-                shoot = i_shoot.GetInput(),
-                shootThisFrame = i_shoot.GetInputDown(),
-                target = i_target.GetInput(),
-                itemNext = i_itemNext.GetInput(),
-                itemPrevious = i_itemPrevious.GetInput(),
+                shoot = i_shoot.GetInput() || UInput.GetMouseButton(0),
+                shootThisFrame = i_shoot.GetInputDown() || UInput.GetMouseButtonDown(0),
+                target = i_target.GetInput() || UInput.GetMouseButton(1),
+                itemNext = i_itemNext.GetInput() || UInput.mouseScrollDelta.y > 0f,
+                itemPrevious = i_itemPrevious.GetInput() || UInput.mouseScrollDelta.y < 0f,
 
                 zoom = i_zoom.GetInputValue<float>(),
-                look = i_look.GetInputValue<Vector2>(),
+                look = new Vector2(UInput.GetAxis("Mouse X"), -UInput.GetAxis("Mouse Y")) -
+                    i_look.GetInputValue<Vector2>(),
             };
 
-            foreach (var item in playerInputablesList)
+            foreach (var item in inputablesList)
                 if (item is IInputable inputable)
                     inputable.HandleInput(playerInput);
         }

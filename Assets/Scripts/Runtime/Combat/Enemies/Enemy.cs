@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using TMPro;
 using System;
+using UnityEngine.Events;
 
 namespace Game.Runtime.Combat
 {
@@ -12,9 +11,8 @@ namespace Game.Runtime.Combat
         public enum State
         {
             NotActivated,
-            Activating,
             Idle,
-            Targeting,
+            PlayerDetected,
         }
 
         public State EnemyState { get; private set; } = State.NotActivated;
@@ -31,20 +29,23 @@ namespace Game.Runtime.Combat
             }
         }
 
-        [Label("Animations")]
-        [SerializeField] Animator anim;
-
         [Label("States")]
         [BeginGroup("Activation")]
         [SerializeField] bool activateOnAwake = true;
         [SerializeField] float activationLength;
         [EndGroup]
-        [SerializeField] string activactionAnimationTrigger;
+        public UnityEvent OnActivate;
 
-        [BeginGroup("Triggering")]
+        [BeginGroup("Detecting Player")]
         [SerializeField][Layer] int playerLayer;
+        [SerializeField] float detectRange;
         [EndGroup]
-        [SerializeField] float triggerRange;
+        public UnityEvent OnDetectPlayer;
+
+        [BeginGroup("Losing Player")]
+        [SerializeField] float loseRange;
+        [EndGroup]
+        public UnityEvent OnLosePlayer;
 
         [Label("Debug")]
         [EditorButton(nameof(Activate))]
@@ -62,7 +63,10 @@ namespace Game.Runtime.Combat
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, triggerRange);
+            Gizmos.DrawWireSphere(transform.position, detectRange);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, loseRange);
         }
 
         private void FixedUpdate()
@@ -71,13 +75,13 @@ namespace Game.Runtime.Combat
             {
                 case State.NotActivated:
                     break;
-                case State.Activating:
-                    break;
                 case State.Idle:
-                    if (Physics.CheckSphere(transform.position, triggerRange, playerLayer))
-                        TriggerTargeting();
+                    if (Physics.CheckSphere(transform.position, detectRange, playerLayer))
+                        DetectPlayer();
                     break;
-                case State.Targeting:
+                case State.PlayerDetected:
+                    if (!Physics.CheckSphere(transform.position, loseRange, playerLayer))
+                        LosePlayer();
                     break;
             }
 
@@ -86,22 +90,21 @@ namespace Game.Runtime.Combat
 
         public void Activate()
         {
-            if (CanPlayAnimation(activactionAnimationTrigger))
-                anim.SetTrigger(activactionAnimationTrigger);
-
             EnemyState = State.Idle;
+            OnActivate.Invoke();
         }
 
-        public void TriggerTargeting()
+        public void DetectPlayer()
         {
-            EnemyState = State.Targeting;
+            EnemyState = State.PlayerDetected;
+            OnDetectPlayer.Invoke();
         }
 
-        bool CanPlayAnimation(string animName) =>
-            anim != null && 
-            anim.parameters
-            .Select(x => x.name)
-            .Contains(animName);
+        public void LosePlayer()
+        {
+            EnemyState = State.Idle;
+            OnLosePlayer.Invoke();
+        }
 
         void RefreshDebugTextState()
         {
