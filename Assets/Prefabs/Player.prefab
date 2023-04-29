@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4330242922824376793}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -527,8 +527,17 @@ MonoBehaviour:
     ammo: 50
   shootPointPosition: {fileID: 5847565344233813800}
   shootPointRotation: {fileID: 8558194444767366110}
+  playerCamera: {fileID: 8558194445770310664}
+  targetRayPoint: {fileID: 8558194445680189562}
+  targetRayLayerMask:
+    serializedVersion: 2
+    m_Bits: 136
+  targetBoxLayerMask: 7
+  maxTargetDistance: 32
   i_shoot:
     guid: c6179e1f-c6d8-42c4-827a-3a71f75dd18a
+  i_target:
+    guid: 511b173d-12db-469e-af41-1715efcba3d3
   i_itemNext:
     guid: 2a9659bf-5c4f-495b-9229-5064aec30ca4
   i_itemPrevious:

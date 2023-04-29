@@ -26,6 +26,7 @@ namespace Game.Runtime.Camera
 
         public static float Sensitivity { get; set; } = 1f;
         public static float ZoomSpeed { get; set; } = 1f;
+        public Vector2? OverrideRotation { get; set; } = null;
 
         private void Awake()
         {
@@ -55,12 +56,20 @@ namespace Game.Runtime.Camera
             Vector2 cameraInput = new Vector2(Input.GetAxis("Mouse X"), -Input.GetAxis("Mouse Y")) -
                 i_look.GetInputValue<Vector2>();
 
-            _yRotation += cameraInput.y * Sensitivity;
-            _yRotation = Mathf.Clamp(_yRotation, yRotationLimit.x, yRotationLimit.y);
             float xMove = cameraInput.x * Sensitivity;
+            float xRotation = xAxis.eulerAngles.y + xMove;
+            _yRotation += cameraInput.y * Sensitivity;
+
+            if (OverrideRotation.HasValue)
+            {
+                xRotation = OverrideRotation.Value.x;
+                _yRotation = OverrideRotation.Value.y;
+            }
+
+            _yRotation = Mathf.Clamp(_yRotation, yRotationLimit.x, yRotationLimit.y);
 
             yAxis.eulerAngles = new Vector3(_yRotation, yAxis.eulerAngles.y, yAxis.eulerAngles.z);
-            xAxis.eulerAngles += Vector3.up * xMove;
+            xAxis.eulerAngles = Vector3.up * xRotation;
         }
 
         void HandleZoom()

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Game.Runtime.Combat.Weapons.Items;
+using Game.Runtime.Camera;
 using qASIC.Input;
 using qASIC;
 
@@ -15,8 +16,15 @@ namespace Game.Runtime.Combat.Weapons
         [SerializeField] Transform shootPointPosition;
         [SerializeField] Transform shootPointRotation;
 
+        [Label("Targeting")]
+        [SerializeField] PlayerCamera playerCamera;
+        [SerializeField] LayerMask targetRayLayerMask;
+        [SerializeField] [Layer] int targetBoxLayerMask;
+        [SerializeField] float maxTargetDistance = 20f;
+
         [Label("Input")]
         [SerializeField] InputMapItemReference i_shoot;
+        [SerializeField] InputMapItemReference i_target;
         [SerializeField] InputMapItemReference i_itemNext;
         [SerializeField] InputMapItemReference i_itemPrevious;
 
@@ -29,8 +37,20 @@ namespace Game.Runtime.Combat.Weapons
                 ChangeWeapon(-1);
 
             HandleWeapon();
+            HandleTargeting();
 
             qDebug.DisplayValue("_selectedItemIndex", _selectedItemIndex);
+            qDebug.DisplayValue("_currentTarget", _currentTarget?.name);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = new Color(0.6f, 0f, 1f);
+            if (CameraController.Singleton != null)
+            {
+                var startPosition = CameraController.Singleton.transform;
+                Gizmos.DrawLine(startPosition.position, startPosition.forward * maxTargetDistance);
+            }
         }
 
         float _equipTime;
@@ -86,6 +106,82 @@ namespace Game.Runtime.Combat.Weapons
             };
 
             currentWeapon.weapon.Shoot(context);
+        }
+
+        TargetBox _currentTarget;
+        /// <summary>Wait for the player to stop pressing the target button</summary>
+        bool _waitForTargetStop;
+        void HandleTargeting()
+        {
+            bool targetInput = i_target.GetInput() ||
+                Input.GetMouseButton(1);
+
+            //Ignore if the player didn't stop targeting
+            if (_waitForTargetStop)
+            {
+                if (!targetInput)
+                    _waitForTargetStop = false;
+
+                return;
+            }
+
+            switch (_currentTarget == null, targetInput)
+            {
+                //Start targeting
+                case (true, true):
+                    var target = DetectTarget();
+
+                    StartTargeting(target);
+                    break;
+                //Targeting
+                case (false, true):
+                    var startPoint = CameraController.Singleton.transform;
+                    var rotation = Quaternion.LookRotation(_currentTarget.transform.position + _currentTarget.center - startPoint.position).eulerAngles;
+
+                    playerCamera.OverrideRotation = new Vector2(rotation.y,
+                        rotation.x > 180f ? rotation.x - 360f : rotation.x);
+
+                    if (DetectTarget() != _currentTarget)
+                    {
+                        StopTargeting();
+                        _waitForTargetStop = true;
+                    }
+                    break;
+                //Stop targeting
+                case (false, false):
+                    StopTargeting();
+                    break;
+            }
+        }
+
+        void StartTargeting(TargetBox target)
+        {
+            if (target == null)
+                return;
+
+            _currentTarget = target;
+            _currentTarget.OnStartTargeting.Invoke();
+        }
+
+        void StopTargeting()
+        {
+            if (_currentTarget != null)
+                _currentTarget.OnStopTargeting.Invoke();
+
+            _currentTarget = null;
+            playerCamera.OverrideRotation = null;
+        }
+
+        TargetBox DetectTarget()
+        {
+            var startPoint = CameraController.Singleton.transform;
+
+            bool didHit = Physics.Raycast(startPoint.position, startPoint.forward, out RaycastHit hit, maxTargetDistance, targetRayLayerMask);
+            if (!didHit ||
+                hit.transform.gameObject.layer != targetBoxLayerMask)
+                return null;
+
+            return hit.transform.GetComponent<TargetBox>();
         }
 
         [System.Serializable]

@@ -45,6 +45,7 @@ MonoBehaviour:
     guid: 2810c60e-7a0d-42b2-a496-d02694ac8f43
     items:
     - rid: 3556189601171505177
+    - rid: 3556189605241552902
     - rid: 3556189605241552896
     - rid: 3556189605241552897
   references:
@@ -219,3 +220,10 @@ MonoBehaviour:
         guid: 9877e5b2-789b-4e55-b7dd-b937b44207c6
         keys:
         - key_gamepad/LeftBumper
+    - rid: 3556189605241552902
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Target
+        guid: 511b173d-12db-469e-af41-1715efcba3d3
+        keys:
+        - key_gamepad/LeftTrigger
