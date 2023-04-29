@@ -30,9 +30,13 @@ namespace Game.Runtime.Input
         [EndGroup]
         [SerializeField] InputMapItemReference i_look;
 
+        PlayerInput _playerInput;
+        public PlayerInput GetPlayerInput() =>
+            _playerInput;
+
         private void Update()
         {
-            var playerInput = new PlayerInput()
+            _playerInput = new PlayerInput()
             {
                 movement = i_movement.GetInputValue<Vector2>(),
                 sprint = i_sprint.GetInput(),
@@ -54,7 +58,7 @@ namespace Game.Runtime.Input
 
             foreach (var item in inputablesList)
                 if (item is IInputable inputable)
-                    inputable.HandleInput(playerInput);
+                    inputable.HandleInput(_playerInput);
         }
     }
 }
