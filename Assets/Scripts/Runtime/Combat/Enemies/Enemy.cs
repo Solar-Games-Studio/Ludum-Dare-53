@@ -12,7 +12,7 @@ namespace Game.Runtime.Combat
         {
             NotActivated,
             Idle,
-            PlayerDetected,
+            TargetDetected,
         }
 
         public State EnemyState { get; private set; } = State.NotActivated;
@@ -29,6 +29,8 @@ namespace Game.Runtime.Combat
             }
         }
 
+        public TargetBox Target { get; private set; }
+
         [Label("States")]
         [BeginGroup("Activation")]
         [SerializeField] bool activateOnAwake = true;
@@ -36,13 +38,13 @@ namespace Game.Runtime.Combat
         [EndGroup]
         public UnityEvent OnActivate;
 
-        [BeginGroup("Detecting Player")]
-        [SerializeField][Layer] int playerLayer;
+        [BeginGroup("Detecting Target")]
+        [SerializeField] LayerMask targetBoxLayer;
         [SerializeField] float detectRange;
         [EndGroup]
         public UnityEvent OnDetectPlayer;
 
-        [BeginGroup("Losing Player")]
+        [BeginGroup("Losing Target")]
         [SerializeField] float loseRange;
         [EndGroup]
         public UnityEvent OnLosePlayer;
@@ -76,16 +78,34 @@ namespace Game.Runtime.Combat
                 case State.NotActivated:
                     break;
                 case State.Idle:
-                    if (Physics.CheckSphere(transform.position, detectRange, playerLayer))
-                        DetectPlayer();
+                    var target = FindTarget();
+                    
+                    if (target != null)
+                        DetectTarget(target);
                     break;
-                case State.PlayerDetected:
-                    if (!Physics.CheckSphere(transform.position, loseRange, playerLayer))
-                        LosePlayer();
+                case State.TargetDetected:
+                    if (!Physics.SphereCastAll(transform.position, loseRange, Vector3.up, 0f, targetBoxLayer)
+                        .Select(x => x.transform)
+                        .Contains(Target.transform))
+                    {
+                        Target = FindTarget();
+                        if (Target == null)
+                            LoseTarget();
+                    }
                     break;
             }
 
             GenerateDebugText();
+        }
+
+        TargetBox FindTarget()
+        {
+            var targets = Physics.SphereCastAll(transform.position, detectRange, Vector3.up, 0f, targetBoxLayer)
+                .Select(x => x.collider.GetComponent<TargetBox>())
+                .Where(x => x.team == TargetBox.Team.Friendly)
+                .ToList();
+
+            return targets.FirstOrDefault();
         }
 
         public void Activate()
@@ -94,14 +114,16 @@ namespace Game.Runtime.Combat
             OnActivate.Invoke();
         }
 
-        public void DetectPlayer()
+        public void DetectTarget(TargetBox target)
         {
-            EnemyState = State.PlayerDetected;
+            Target = target;
+            EnemyState = State.TargetDetected;
             OnDetectPlayer.Invoke();
         }
 
-        public void LosePlayer()
+        public void LoseTarget()
         {
+            Target = null;
             EnemyState = State.Idle;
             OnLosePlayer.Invoke();
         }
