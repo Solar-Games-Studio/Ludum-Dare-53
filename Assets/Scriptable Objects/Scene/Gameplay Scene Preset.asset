@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Gameplay Scene Preset
   m_EditorClassIdentifier: 
   targetScenes: []
-  staticScenes: []
+  staticScenes:
+  - Gameplay UI
