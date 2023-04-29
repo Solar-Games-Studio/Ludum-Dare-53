@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultGroup: 0
   groups:
-  - itemName: Gameplay
+  - itemName: Movement
     guid: 08e515b9-1341-49be-9484-7005bb3c2d20
     items:
     - rid: 3556189591879548940
@@ -41,6 +41,12 @@ MonoBehaviour:
     - rid: 3556189601171505174
     - rid: 3556189601171505176
     - rid: 3556189601171505175
+  - itemName: Combat
+    guid: 2810c60e-7a0d-42b2-a496-d02694ac8f43
+    items:
+    - rid: 3556189601171505177
+    - rid: 3556189605241552896
+    - rid: 3556189605241552897
   references:
     version: 2
     RefIds:
@@ -135,6 +141,7 @@ MonoBehaviour:
         guid: fe8a0058-db82-42f9-b6c7-c5a502a8ad6a
         keys:
         - key_gamepad/DPadUp
+        - key_keyboard/UpArrow
     - rid: 3556189601171505170
       type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
       data:
@@ -142,6 +149,7 @@ MonoBehaviour:
         guid: 92c5c3ec-a6ad-416f-9d55-77a1bfecee4c
         keys:
         - key_gamepad/DPadDown
+        - key_keyboard/DownArrow
     - rid: 3556189601171505171
       type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
       data:
@@ -190,3 +198,24 @@ MonoBehaviour:
           axisGuid: 
           positiveGuid: 6d340ec2-b9da-4293-9c94-9f0b3b44279e
           negativeGuid: 0b8eb623-afc8-4e98-ab36-9df931ccfe96
+    - rid: 3556189601171505177
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Shoot
+        guid: c6179e1f-c6d8-42c4-827a-3a71f75dd18a
+        keys:
+        - key_gamepad/RightTrigger
+    - rid: 3556189605241552896
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Item Next
+        guid: 2a9659bf-5c4f-495b-9229-5064aec30ca4
+        keys:
+        - key_gamepad/RightBumper
+    - rid: 3556189605241552897
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Item Previous
+        guid: 9877e5b2-789b-4e55-b7dd-b937b44207c6
+        keys:
+        - key_gamepad/LeftBumper

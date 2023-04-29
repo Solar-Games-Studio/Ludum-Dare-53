@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4330242922824376793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5847565344233813800}
+  m_Layer: 6
+  m_Name: Shoot Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5847565344233813800
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4330242922824376793}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8558194445001456402}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8558194444574169988
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8558194444574169989}
   m_Layer: 6
-  m_Name: Camera X
+  m_Name: Y Axis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8558194444767366110}
   m_Layer: 6
-  m_Name: Camera Y
+  m_Name: Z Axis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,7 +226,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5847565344233813800}
   m_Father: {fileID: 8558194445770310666}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -363,6 +395,7 @@ GameObject:
   - component: {fileID: 8558194445770310667}
   - component: {fileID: 8558194445770310664}
   - component: {fileID: 8558194445770310665}
+  - component: {fileID: 8558194444911029928}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -422,8 +455,7 @@ MonoBehaviour:
   yRotationLimit: {x: -90, y: 90}
   cam: {fileID: 8558194445680189560}
   zoomRegion: {x: 0.7, y: 2}
-  zoomSpeed: 0.3
-  gamepadZoomSpeed: 5
+  zoomSpeed: 5
   i_zoom:
     guid: 1f1fb29b-5030-4e96-8c42-c529886a8436
   i_look:
@@ -476,3 +508,28 @@ MonoBehaviour:
   OnJump:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8558194444911029928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8558194445770310669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d1c2ecc16bb4b43ac5525578d100cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - weapon: {fileID: 11400000, guid: 38262d3215163f148baa18de1da1a9ae, type: 2}
+    ammo: 50
+  - weapon: {fileID: 11400000, guid: 3116b79317face74f8884acbea7651ad, type: 2}
+    ammo: 50
+  shootPointPosition: {fileID: 5847565344233813800}
+  shootPointRotation: {fileID: 8558194444767366110}
+  i_shoot:
+    guid: c6179e1f-c6d8-42c4-827a-3a71f75dd18a
+  i_itemNext:
+    guid: 2a9659bf-5c4f-495b-9229-5064aec30ca4
+  i_itemPrevious:
+    guid: 9877e5b2-789b-4e55-b7dd-b937b44207c6

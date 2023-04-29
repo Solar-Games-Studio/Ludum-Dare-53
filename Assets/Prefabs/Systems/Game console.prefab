@@ -1108,6 +1108,7 @@ GameObject:
   - component: {fileID: 8893613932255433451}
   - component: {fileID: 8893613932255433450}
   - component: {fileID: 8893613932255433449}
+  - component: {fileID: 8692356932226842042}
   m_Layer: 0
   m_Name: Game console
   m_TagString: Untagged
@@ -1166,13 +1167,38 @@ MonoBehaviour:
   keyMode: 0
   OnChangeState:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8692356932226842042}
+        m_TargetAssemblyTypeName: Game.Runtime.Camera.ChangeCursorState, Game.Runtime.Camera
+        m_MethodName: ChangeUnlockedState
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   mode: 0
   togglerTag: console
   addToDontDestroy: 0
   removeDuplicates: 1
   item:
     guid: f941712a-4675-4ab2-89a1-b4fee6db2474
+--- !u!114 &8692356932226842042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8893613932255433448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6023175fa64e7c42abbacb9691d2aff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  locked: 1
 --- !u!1 &8893613932262263875
 GameObject:
   m_ObjectHideFlags: 0

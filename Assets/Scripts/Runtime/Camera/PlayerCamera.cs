@@ -16,7 +16,6 @@ namespace Game.Runtime.Camera
         [SerializeField] CinemachineVirtualCamera cam;
         [SerializeField][MinMaxSlider(0f, 10f)] Vector2 zoomRegion = new Vector2(1f, 5f);
         [SerializeField] float zoomSpeed = 0.1f;
-        [SerializeField] float gamepadZoomSpeed = 0.1f;
 
         [Label("Input")]
         [SerializeField] InputMapItemReference i_zoom;
@@ -67,8 +66,7 @@ namespace Game.Runtime.Camera
         void HandleZoom()
         {
             float zoom = _camTransposer.m_CameraDistance;
-            zoom -= (Input.mouseScrollDelta.y * zoomSpeed +
-                i_zoom.GetInputValue<float>() * gamepadZoomSpeed * Time.deltaTime) * ZoomSpeed;
+            zoom -= i_zoom.GetInputValue<float>() * zoomSpeed * Time.deltaTime * ZoomSpeed;
             zoom = Mathf.Clamp(zoom, zoomRegion.x, zoomRegion.y);
             _camTransposer.m_CameraDistance = zoom;
         }
