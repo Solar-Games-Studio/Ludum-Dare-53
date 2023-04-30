@@ -28,7 +28,12 @@ namespace Game.Runtime.Movement
         public List<MonoBehaviour> liquidInputables;
         [SerializeField] PlayerInputController playerInput;
 
+        [Label("Rotation")]
+        [SerializeField] Transform xAxis;
+        [SerializeField] Transform yAxis;
+
         [Label("Possessing")]
+        [SerializeField] CharacterController characterController;
         [SerializeField] Vector3 possessionCenter;
         [SerializeField] float possessionRadius = 1f;
         public UnityEvent OnPossess;
@@ -91,7 +96,6 @@ namespace Game.Runtime.Movement
                 //Possessing => Human
                 case (State.Possessing, State.Human):
                     LeavePossession();
-                    anim.SetTrigger(animUnmeltTrigger);
                     break;
             }
 
@@ -113,6 +117,14 @@ namespace Game.Runtime.Movement
             TransformationState = State.Possessing;
             playerInput.inputablesList = possessable.inputables;
 
+            possessable.cameraXTransform.eulerAngles = new Vector3(possessable.cameraXTransform.eulerAngles.x,
+                xAxis.eulerAngles.y,
+                possessable.cameraXTransform.eulerAngles.z);
+
+            possessable.cameraYTransform.eulerAngles = new Vector3(yAxis.eulerAngles.x,
+                possessable.cameraYTransform.eulerAngles.y,
+                possessable.cameraYTransform.eulerAngles.z);
+
             _target = possessable;
             _target.OnPossess.Invoke();
             OnPossess.Invoke();
@@ -121,6 +133,20 @@ namespace Game.Runtime.Movement
         public void LeavePossession()
         {
             if (_target == null) return;
+            anim.SetTrigger(animUnmeltTrigger);
+
+            characterController.enabled = false;
+            transform.position = _target.transform.position;
+            characterController.enabled = true;
+
+            xAxis.eulerAngles = new Vector3(xAxis.eulerAngles.x,
+                _target.cameraXTransform.eulerAngles.y,
+                xAxis.eulerAngles.z);
+
+            yAxis.eulerAngles = new Vector3(_target.cameraYTransform.eulerAngles.x,
+                yAxis.eulerAngles.y,
+                yAxis.eulerAngles.z);
+
             _target.OnLeave.Invoke();
             _target = null;
             OnLeavePossession.Invoke();

@@ -293,13 +293,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7976888895574439933}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8558194445770310666}
-  m_RootOrder: 0
+  m_Father: {fileID: 4032086943266460437}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &7920134153402596691
 CapsuleCollider:
@@ -431,7 +431,7 @@ Transform:
   - {fileID: 5847565344233813800}
   - {fileID: 8438128835256194628}
   m_Father: {fileID: 8558194445770310666}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8558194445770310669
 GameObject:
@@ -465,7 +465,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1187483828520319790}
   - {fileID: 4032086943266460437}
   - {fileID: 8558194445001456402}
   m_Father: {fileID: 0}
@@ -567,6 +566,9 @@ MonoBehaviour:
   - {fileID: 6176442867398659847}
   - {fileID: 6909249709408722195}
   playerInput: {fileID: 3727029651920769180}
+  xAxis: {fileID: 0}
+  yAxis: {fileID: 0}
+  characterController: {fileID: 8558194445770310667}
   possessionCenter: {x: 0, y: 0, z: 0}
   possessionRadius: 1
   OnPossess:
@@ -668,7 +670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8932222206654486920, guid: e5d572d6d9a352d47bce36c9a63292ed, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8932222206654486920, guid: e5d572d6d9a352d47bce36c9a63292ed, type: 3}
       propertyPath: m_LocalPosition.x

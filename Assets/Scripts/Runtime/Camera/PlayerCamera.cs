@@ -30,6 +30,13 @@ namespace Game.Runtime.Camera
             _camTransposer = cam.GetCinemachineComponent<CinemachineFramingTransposer>();
         }
 
+        private void OnEnable()
+        {
+            _yRotation = yAxis.eulerAngles.x > 180f ?
+                yAxis.eulerAngles.x - 360f :
+                yAxis.eulerAngles.x;
+        }
+
         void Update()
         {
             HandleRotation();
@@ -65,8 +72,8 @@ namespace Game.Runtime.Camera
 
             _yRotation = Mathf.Clamp(_yRotation, yRotationLimit.x, yRotationLimit.y);
 
-            yAxis.eulerAngles = new Vector3(_yRotation, yAxis.eulerAngles.y, yAxis.eulerAngles.z);
             xAxis.eulerAngles = Vector3.up * xRotation;
+            yAxis.eulerAngles = new Vector3(_yRotation, yAxis.eulerAngles.y, yAxis.eulerAngles.z);
         }
 
         void HandleZoom()
