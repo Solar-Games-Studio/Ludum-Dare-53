@@ -18,6 +18,11 @@ namespace Game.Runtime.Movement
 
         public State TransformationState { get; set; }
 
+        [Label("Animation")]
+        [SerializeField] Animator anim;
+        [SerializeField] string animMeltTrigger;
+        [SerializeField] string animUnmeltTrigger;
+
         [Label("Input")]
         public List<MonoBehaviour> humanInputables;
         public List<MonoBehaviour> liquidInputables;
@@ -76,10 +81,17 @@ namespace Game.Runtime.Movement
                             return;
                         }
                     }
+
+                    anim.SetTrigger(animUnmeltTrigger);
+                    break;
+                //Human => Liquid
+                case (State.Human, State.Liquid):
+                    anim.SetTrigger(animMeltTrigger);
                     break;
                 //Possessing => Human
                 case (State.Possessing, State.Human):
                     LeavePossession();
+                    anim.SetTrigger(animUnmeltTrigger);
                     break;
             }
 
