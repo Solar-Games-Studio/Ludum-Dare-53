@@ -179,7 +179,12 @@ namespace Game.Runtime.Combat.Weapons
                 hit.transform.gameObject.layer != targetBoxLayerMask)
                 return null;
 
-            return hit.transform.GetComponent<TargetBox>();
+            var target = hit.transform.GetComponent<TargetBox>();
+
+            if (target.team != TargetBox.Team.Enemy)
+                return null;
+
+            return target;
         }
 
         [System.Serializable]

@@ -19,5 +19,8 @@ namespace Game.Runtime.Input
 
         public float zoom;
         public Vector2 look;
+
+        public bool interact;
+        public bool interactThisFrame;
     }
 }

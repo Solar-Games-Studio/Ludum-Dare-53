@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1852768780293670298}
   - component: {fileID: 1433252383220782990}
   - component: {fileID: 2381667438069160533}
+  - component: {fileID: 9066304949313398652}
   m_Layer: 6
   m_Name: Player Logic
   m_TagString: Untagged
@@ -117,3 +118,25 @@ MonoBehaviour:
     m_Bits: 136
   targetBoxLayerMask: 7
   maxTargetDistance: 32
+--- !u!114 &9066304949313398652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8747658805429918509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6f012c0a1e57104da7555f56c0476f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 16
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 281
+  OnSelectInteractable:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeselectInteractable:
+    m_PersistentCalls:
+      m_Calls: []

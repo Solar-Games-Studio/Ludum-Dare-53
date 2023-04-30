@@ -27,8 +27,11 @@ namespace Game.Runtime.Input
 
         [Label("Camera")]
         [SerializeField] InputMapItemReference i_zoom;
-        [EndGroup]
         [SerializeField] InputMapItemReference i_look;
+
+        [Label("Interaction")]
+        [EndGroup]
+        [SerializeField] InputMapItemReference i_interact;
 
         PlayerInput _playerInput;
         public PlayerInput GetPlayerInput() =>
@@ -54,6 +57,9 @@ namespace Game.Runtime.Input
                 zoom = i_zoom.GetInputValue<float>(),
                 look = new Vector2(UInput.GetAxis("Mouse X"), -UInput.GetAxis("Mouse Y")) -
                     i_look.GetInputValue<Vector2>(),
+
+                interact = i_interact.GetInput(),
+                interactThisFrame = i_interact.GetInputDown(),
             };
 
             foreach (var item in inputablesList)

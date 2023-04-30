@@ -48,6 +48,10 @@ MonoBehaviour:
     - rid: 3556189605241552902
     - rid: 3556189605241552896
     - rid: 3556189605241552897
+  - itemName: Interaction
+    guid: 7bbdb1a3-6492-4f4c-a307-8d44d68308f7
+    items:
+    - rid: 3556189632623017985
   references:
     version: 2
     RefIds:
@@ -227,3 +231,11 @@ MonoBehaviour:
         guid: 511b173d-12db-469e-af41-1715efcba3d3
         keys:
         - key_gamepad/LeftTrigger
+    - rid: 3556189632623017985
+      type: {class: InputBinding, ns: qASIC.Input.Map, asm: qASIC}
+      data:
+        itemName: Interact
+        guid: 03f466f5-4102-4b8b-aa41-12aa3fb7e8cf
+        keys:
+        - key_keyboard/E
+        - key_gamepad/X

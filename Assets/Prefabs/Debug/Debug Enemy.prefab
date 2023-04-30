@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d657bc9078a0a4fa5ee51e65033018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activateOnAwake: 1
+  activateOnAwake: 0
   activationLength: 0
   OnActivate:
     m_PersistentCalls:
@@ -303,6 +303,7 @@ MonoBehaviour:
   - {fileID: 2087811149646856150}
   - {fileID: 1633910822667365826}
   - {fileID: 2612755895962066969}
+  - {fileID: 8691597767353212208}
   modelTransform: {fileID: 382592998520830610}
   cameraXTransform: {fileID: 382592999691391941}
   cameraYTransform: {fileID: 382592998267929427}
@@ -739,7 +740,7 @@ PrefabInstance:
     - target: {fileID: 1433252383220782990, guid: e5d572d6d9a352d47bce36c9a63292ed, type: 3}
       propertyPath: followAxis
       value: 
-      objectReference: {fileID: 382592998267929427}
+      objectReference: {fileID: 382592999691391941}
     - target: {fileID: 1433252383220782990, guid: e5d572d6d9a352d47bce36c9a63292ed, type: 3}
       propertyPath: modelTransform
       value: 
@@ -853,6 +854,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70d1c2ecc16bb4b43ac5525578d100cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8691597767353212208 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9066304949313398652, guid: e5d572d6d9a352d47bce36c9a63292ed, type: 3}
+  m_PrefabInstance: {fileID: 382592999765998156}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8947195710922400097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6f012c0a1e57104da7555f56c0476f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8947195710922400097 stripped
