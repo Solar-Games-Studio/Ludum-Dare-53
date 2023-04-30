@@ -4,7 +4,7 @@ using TMPro;
 using System;
 using UnityEngine.Events;
 
-namespace Game.Runtime.Combat
+namespace Game.Runtime.Combat.Enemies
 {
     public class Enemy : MonoBehaviour
     {
@@ -79,7 +79,7 @@ namespace Game.Runtime.Combat
                     break;
                 case State.Idle:
                     var target = FindTarget();
-                    
+
                     if (target != null)
                         DetectTarget(target);
                     break;
